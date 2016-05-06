@@ -49,7 +49,8 @@ public class MainFeedListAndGridFragment extends AppCompatActivity {
         txt_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i =new Intent(getApplicationContext(),ActivityTest.class);
+                startActivity(i);
             }
         });
 

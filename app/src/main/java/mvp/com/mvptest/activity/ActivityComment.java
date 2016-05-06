@@ -1,19 +1,14 @@
 package mvp.com.mvptest.activity;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.androidquery.AQuery;
@@ -25,27 +20,21 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import mvp.com.mvptest.R;
-import mvp.com.mvptest.adapter.RecyclerAdapter;
-import mvp.com.mvptest.adapter.RecyclerAdapterHori;
-import mvp.com.mvptest.model.Comment;
+import mvp.com.mvptest.adapter.UICommentRecyclerAdapter;
 import mvp.com.mvptest.model.Comment_view;
-import mvp.com.mvptest.model.PostStory;
-import mvp.com.mvptest.presenter.FeedView;
-import mvp.com.mvptest.widget.PullScrollView;
 import mvp.com.mvptest.wiget.RoundedTransformation;
 
 
 public class ActivityComment extends AppCompatActivity {
 
-    RecyclerAdapter recyclerAdapter;
+    UICommentRecyclerAdapter recyclerAdapter;
+    RelativeLayout RelativeLayout;
     private AQuery aq;
-    String url = "http://192.168.1.113:8080/test.php";
+    String url = "http://192.168.1.33:8080/test.php";
     ArrayList<Comment_view> listComment = new ArrayList<>();
-    RelativeLayout holder;
-    public RecyclerView mRecyclerView,rvFeed2,rvFeedList;
+    public RecyclerView mRecyclerView,rvFeed2;
     String name;
     String imageProfile;
     String imagePhoto;
@@ -81,6 +70,7 @@ public class ActivityComment extends AppCompatActivity {
         imageProfile = getIntent().getStringExtra("imageProfile");
         imagePhoto = getIntent().getStringExtra("imagePhoto");
         textComment = getIntent().getStringExtra("text");
+
         if (type.equals("text")) {
             aq.ajax(url, JSONObject.class, this, "jsonCallback");
             text_view.setVisibility(View.VISIBLE);
@@ -100,6 +90,7 @@ public class ActivityComment extends AppCompatActivity {
                     .transform(new RoundedTransformation(100, 4))
                     .into(profile_avatar);
         }
+
         if (type.equals("photo")) {
             aq.ajax(url, JSONObject.class, this, "jsonCallback");
             text_view.setVisibility(View.GONE);
@@ -196,7 +187,7 @@ public class ActivityComment extends AppCompatActivity {
                     comment.setMsg(msg);
                     comment.setImg(img);
                     listComment.add(comment);
-                    recyclerAdapter = new RecyclerAdapter(getApplicationContext(), listComment);
+                    recyclerAdapter = new UICommentRecyclerAdapter(getApplicationContext(), listComment);
                     mRecyclerView.setAdapter(recyclerAdapter);
                     rvFeed2.setAdapter(recyclerAdapter);
                     recyclerAdapter.notifyDataSetChanged();

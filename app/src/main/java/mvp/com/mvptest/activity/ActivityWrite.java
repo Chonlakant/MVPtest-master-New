@@ -55,10 +55,8 @@ import mvp.com.mvptest.stickerNew.SS4EmojiFragment;
 public class ActivityWrite extends AppCompatActivity implements FeedView, SS0Fragment.OnChildInteractionListener, SS1Fragment.OnChildInteractionListener2,
         SS2Fragment.OnChildInteractionListener3, SS3Fragment.OnChildInteractionListener4, SS4EmojiFragment.OnChildInteractionListener5 {
 
-    //ArrayList<post> listPost = new ArrayList<>();
     RecyclerView rvFeed;
     EditText chat_edit_text1;
-    RelativeLayout holder;
     boolean isLayoutStickerShow = false;
     boolean isLayoutStickerShowPhoto = false;
     boolean isLayoutStickerShowVideo = false;
@@ -78,16 +76,12 @@ public class ActivityWrite extends AppCompatActivity implements FeedView, SS0Fra
     Button btn_choose_video,btn_video;
     VideoView preview_video;
     ImageView preview_photo;
-    // Activity request codes
-    private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     private static final int CAMERA_CAPTURE_VIDEO_REQUEST_CODE = 300;
     private static final int CAMERA_IMAGE_VIDEO_REQUEST_CODE = 400;
     public static final int MEDIA_TYPE_IMAGE = 1;
     public static final int MEDIA_TYPE_VIDEO = 2;
     private static final int REQUEST_PICK_IMAGE = 10011;
     private static final int REQUEST_SAF_PICK_IMAGE = 10012;
-    private static final String PROGRESS_DIALOG = "ProgressDialog";
-    // directory name to store captured images and videos
     private static final String IMAGE_DIRECTORY_NAME = "Hello Camera";
     ImageIntentHandler.ImagePair mImagePair;
     View inflatedView;
@@ -100,7 +94,6 @@ public class ActivityWrite extends AppCompatActivity implements FeedView, SS0Fra
         rvFeed = (RecyclerView) findViewById(R.id.rvFeed);
         viewEdit = (RelativeLayout) findViewById(R.id.viewEdit);
         chat_edit_text1 = (EditText) findViewById(R.id.chat_edit_text1);
-       // holder = (RelativeLayout) findViewById(R.id.holder);
         btn_sticker = (ImageView) findViewById(R.id.emojiButton);
         img_sticker = (ImageView) findViewById(R.id.img_sticker);
         img_photo = (ImageView) findViewById(R.id.img_photo);
@@ -136,7 +129,7 @@ public class ActivityWrite extends AppCompatActivity implements FeedView, SS0Fra
         img_sticker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                hideKeyboard(v);
                 if (!isLayoutStickerShow) {
                     inflatedViewVideo.setVisibility(View.GONE);
                     inflatedViewPhoto.setVisibility(View.GONE);
@@ -151,6 +144,7 @@ public class ActivityWrite extends AppCompatActivity implements FeedView, SS0Fra
         img_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                hideKeyboard(v);
                 if (!isLayoutStickerShowPhoto) {
                     inflatedView.setVisibility(View.GONE);
                     inflatedViewVideo.setVisibility(View.GONE);
@@ -168,6 +162,7 @@ public class ActivityWrite extends AppCompatActivity implements FeedView, SS0Fra
         img_video.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                hideKeyboard(v);
                 if (!isLayoutStickerShowVideo) {
                     inflatedView.setVisibility(View.GONE);
                     inflatedViewPhoto.setVisibility(View.GONE);
@@ -198,7 +193,6 @@ public class ActivityWrite extends AppCompatActivity implements FeedView, SS0Fra
             }
         });
 
-        //เลือกอัลบั้ม
         btn_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -208,7 +202,6 @@ public class ActivityWrite extends AppCompatActivity implements FeedView, SS0Fra
             }
         });
 
-        //เลือกถ่ายวีดีโอ
         btn_choose_video.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -216,7 +209,6 @@ public class ActivityWrite extends AppCompatActivity implements FeedView, SS0Fra
             }
         });
 
-        //เลือกวีดีโอ
         btn_video.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -228,11 +220,6 @@ public class ActivityWrite extends AppCompatActivity implements FeedView, SS0Fra
             @Override
             public void onClick(View v) {
                 hideKeyboard(v);
-//                mKeyBoardPopWindow.showPopupWindow();
-//
-//                getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-
-                //onClickStickerEventNew();
                 viewEdit.setVisibility(View.GONE);
                 onClickStickerEvent();
             }
@@ -260,16 +247,13 @@ public class ActivityWrite extends AppCompatActivity implements FeedView, SS0Fra
 
          if (requestCode == CAMERA_CAPTURE_VIDEO_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                // video successfully recorded
-                // preview the recorded video
+
                 previewVideo();
             } else if (resultCode == RESULT_CANCELED) {
-                // user cancelled recording
                 Toast.makeText(getApplicationContext(),
                         "User cancelled video recording", Toast.LENGTH_SHORT)
                         .show();
             } else {
-                // failed to record video
                 Toast.makeText(getApplicationContext(),
                         "Sorry! Failed to record video", Toast.LENGTH_SHORT)
                         .show();
@@ -287,22 +271,15 @@ public class ActivityWrite extends AppCompatActivity implements FeedView, SS0Fra
         }
     }
 
-
-    /*
-	 * Recording video
-	 */
     private void recordVideo() {
         Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
 
         fileUri = getOutputMediaFileUri(MEDIA_TYPE_VIDEO);
 
-        // set video quality
         intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
 
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file
-        // name
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
 
-        // start the video capture Intent
         startActivityForResult(intent, CAMERA_CAPTURE_VIDEO_REQUEST_CODE);
     }
     public void pivkVideo(){
@@ -319,8 +296,6 @@ public class ActivityWrite extends AppCompatActivity implements FeedView, SS0Fra
         pageAdapter.addFragment(SS1Fragment.getInstance("set1"), "set1", R.drawable.ic_set_1, "");
         pageAdapter.addFragment(SS2Fragment.getInstance("set3"), "set3", R.drawable.ic_set_3, "");
         pageAdapter.addFragment(SS3Fragment.getInstance("set4"), "set4", R.drawable.ic_set_4, "");
-        //pageAdapter.addFragment(EmojiFragment.newInstance(chatEditText, chatEditText.getId()), "set5", R.drawable.b_happy_sticker, "");
-
         viewPager.setAdapter(pageAdapter);
 
     }
@@ -387,9 +362,6 @@ public class ActivityWrite extends AppCompatActivity implements FeedView, SS0Fra
     public void clickOnItem5(String pt) {
 
     }
-    /*
-         * Previewing recorded video
-         */
     private void previewVideo() {
         try {
 
@@ -413,13 +385,6 @@ public class ActivityWrite extends AppCompatActivity implements FeedView, SS0Fra
         }
     }
 
-    public void takePhoto(){
-        Intent takePhoto = new Intent("android.media.action.IMAGE_CAPTURE");
-        startActivityForResult(takePhoto, 1);
-    }
-
-
-
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
@@ -427,10 +392,8 @@ public class ActivityWrite extends AppCompatActivity implements FeedView, SS0Fra
 
     public void onClickStickerEvent() {
         if (!isLayoutStickerShow) {
-          //  holder.setVisibility(View.VISIBLE);
             isLayoutStickerShow = true;
         } else {
-          //  holder.setVisibility(View.GONE);
             isLayoutStickerShow = false;
         }
     }
@@ -438,18 +401,11 @@ public class ActivityWrite extends AppCompatActivity implements FeedView, SS0Fra
         return Uri.fromFile(getOutputMediaFile(type));
     }
 
-    /*
-     * returning image / video
-     */
     private static File getOutputMediaFile(int type) {
-
-        // External sdcard location
         File mediaStorageDir = new File(
                 Environment
                         .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
                 IMAGE_DIRECTORY_NAME);
-
-        // Create the storage directory if it does not exist
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
                 Log.d(IMAGE_DIRECTORY_NAME, "Oops! Failed create "
@@ -458,7 +414,6 @@ public class ActivityWrite extends AppCompatActivity implements FeedView, SS0Fra
             }
         }
 
-        // Create a media file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
                 Locale.getDefault()).format(new Date());
         File mediaFile;

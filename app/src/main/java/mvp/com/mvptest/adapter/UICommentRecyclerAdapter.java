@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -18,13 +19,13 @@ import mvp.com.mvptest.R;
 import mvp.com.mvptest.model.Comment_view;
 import mvp.com.mvptest.wiget.RoundedTransformation;
 
-public class RecyclerAdapterHori extends RecyclerView.Adapter<RecyclerAdapterHori.ContactViewHolder> {
+public class UICommentRecyclerAdapter extends RecyclerView.Adapter<UICommentRecyclerAdapter.ContactViewHolder> {
 
     Context context;
     ArrayList<Comment_view> list = new ArrayList<>();
     public static OnItemClickListener mItemClickListener;
 
-    public RecyclerAdapterHori(Context context, ArrayList<Comment_view> list) {
+    public UICommentRecyclerAdapter(Context context, ArrayList<Comment_view> list) {
         this.context = context;
         this.list = list;
 
@@ -33,7 +34,7 @@ public class RecyclerAdapterHori extends RecyclerView.Adapter<RecyclerAdapterHor
 
     @Override
     public int getItemCount() {
-        return 5;
+        return list.size();
     }
 
     @Override
@@ -56,7 +57,7 @@ public class RecyclerAdapterHori extends RecyclerView.Adapter<RecyclerAdapterHor
     public ContactViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.
                 from(viewGroup.getContext()).
-                inflate(R.layout.item_comment_view_hori, viewGroup, false);
+                inflate(R.layout.item_comment_view, viewGroup, false);
 
         return new ContactViewHolder(itemView);
     }

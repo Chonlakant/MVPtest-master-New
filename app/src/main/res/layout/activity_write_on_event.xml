@@ -83,8 +83,8 @@
                         android:layout_marginBottom="5dp"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
                         android:background="@drawable/ic_sticker_icon_top" />
 
                     <ImageView
@@ -93,8 +93,8 @@
                         android:layout_marginBottom="5dp"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
                         android:background="@drawable/ic_photo_w" />
 
                     <ImageView
@@ -103,8 +103,8 @@
                         android:layout_marginBottom="5dp"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
                         android:background="@drawable/ic_video" />
 
                     <ImageView
@@ -112,8 +112,8 @@
                         android:layout_marginBottom="5dp"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
                         android:background="@drawable/attachment_location_icon" />
                 </LinearLayout>
 
