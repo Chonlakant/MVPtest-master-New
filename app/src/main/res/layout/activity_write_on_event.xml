@@ -136,7 +136,7 @@
                         android:inflatedId="@+id/viewStub1_layout"
                         android:layout="@layout/fragment_sticker_pager"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="350dp"
                         android:layout_centerHorizontal="true" />
 
                     <ViewStub
@@ -144,7 +144,7 @@
                         android:inflatedId="@+id/viewStub1_layout"
                         android:layout="@layout/write_post_photo"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="350dp"
                         android:layout_centerHorizontal="true" />
 
                     <ViewStub
@@ -152,7 +152,7 @@
                         android:inflatedId="@+id/viewStub1_layout"
                         android:layout="@layout/write_post_video"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="350dp"
                         android:layout_centerHorizontal="true" />
 
                 </LinearLayout>
@@ -191,7 +191,6 @@
                         android:paddingLeft="4dp"
                         android:scrollHorizontally="false"
                         android:singleLine="false"
-
                         android:textColor="#000"
                         android:textSize="18sp" />
 
